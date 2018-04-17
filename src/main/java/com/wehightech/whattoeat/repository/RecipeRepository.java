@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class RecipeRepository {
@@ -24,6 +25,10 @@ public class RecipeRepository {
 
     public List<Recipe> getAllRecipes(){
         return recipes;
+    }
+
+    public Optional<Recipe> findRecipeById(Integer idRecipe){
+        return recipes.stream().filter( r -> r.getId().equals(idRecipe)).findFirst();
     }
 
     public Integer addRecipe(Recipe recipe){
