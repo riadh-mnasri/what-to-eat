@@ -9,13 +9,12 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.junit.Assert.*;
-
 public class RecipeRepositoryTest {
 
     private static final int ID_RECIPE_TEST = 99;
     private static final int EXPECTED_ID_RECIPE_TEST = 99;
     private RecipeRepository recipeRepository;
+    private Recipe anyRecipe;
 
     @Before
     public void setUp() {
@@ -42,7 +41,7 @@ public class RecipeRepositoryTest {
     @Test
     public void findRecipeById() {
         // Given
-        Recipe anyRecipe = new Recipe(ID_RECIPE_TEST, "Any Recipe", "Anything eatable", Arrays.asList(new Ingredient("ingredient1"),
+        anyRecipe = new Recipe(ID_RECIPE_TEST, "Any Recipe", "Anything eatable", Arrays.asList(new Ingredient("ingredient1"),
             new Ingredient("ingredient2")));
         // When
         recipeRepository.addRecipe(anyRecipe);
@@ -52,9 +51,21 @@ public class RecipeRepositoryTest {
     }
 
     @Test
+    public void findRecipeByName() {
+        // Given
+         anyRecipe = new Recipe(ID_RECIPE_TEST, "Any Recipe", "Anything eatable", Arrays.asList(new Ingredient("ingredient1"),
+            new Ingredient("ingredient2")));
+        // When
+        recipeRepository.addRecipe(anyRecipe);
+        // Then
+        Assertions.assertThat(recipeRepository.findRecipeByName(anyRecipe.getName()).get()).isEqualTo(anyRecipe);
+
+    }
+
+    @Test
     public void removeRecipe() {
         // Given
-        Recipe anyRecipe = new Recipe(ID_RECIPE_TEST, "Any Recipe", "Anything eatable", Arrays.asList(new Ingredient("ingredient1"),
+         anyRecipe = new Recipe(ID_RECIPE_TEST, "Any Recipe", "Anything eatable", Arrays.asList(new Ingredient("ingredient1"),
             new Ingredient("ingredient2")));
         // When
         recipeRepository.addRecipe(anyRecipe);

@@ -31,6 +31,10 @@ public class RecipeRepository {
         return recipes.stream().filter( r -> r.getId().equals(idRecipe)).findFirst();
     }
 
+    public Optional<Recipe> findRecipeByName(String recipeName){
+        return recipes.stream().filter( r -> r.getName().equalsIgnoreCase(recipeName)).findFirst();
+    }
+
     public Integer addRecipe(Recipe recipe){
         if(!recipes.stream().anyMatch(r -> r.getId().equals(recipe.getId()))){
          recipes.add(recipe);
