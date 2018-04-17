@@ -32,4 +32,11 @@ public class RecipeRepository {
         }
         return recipe.getId();
     }
+
+    public void removeRecipe(Recipe recipe){
+        if(recipes.stream().anyMatch(r -> r.getId().equals(recipe.getId()))){
+            recipes.remove(recipe);
+        }
+    }
+
 }
